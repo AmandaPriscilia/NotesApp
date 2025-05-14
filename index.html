@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Emblema+One&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>Notes App</title>
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <div class="app-content">
+        <header class="app-header" data-aos="fade-down">
+          <app-header title="My Notes App"></app-header>
+        </header>
+
+        <main class="app-main">
+          <div id="app">
+            <notes-form></notes-form>
+            <note-list id="notes-list"></note-list>
+          </div>
+        </main>
+
+        <aside class="app-sidebar" data-aos="fade-right">
+          <app-sidebar></app-sidebar>
+        </aside>
+
+        <footer class="app-footer" data-aos="fade-up">
+          <footer-bar></footer-bar>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

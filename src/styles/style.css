@@ -1,0 +1,272 @@
+:root {
+  --primary-color: #102c57;
+  --secondary-color: white;
+  --light-gray: #f8f9fa;
+  --border-color: #e0e0e0;
+  --text-dark: #333;
+  --text-gray: #666;
+  --accent-color: #ffb1b1;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main Layout Structure */
+.app-content {
+  flex: 1;
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'sidebar main'
+    'footer footer';
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Header */
+.app-header {
+  grid-area: header;
+  display: block;
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 10px 0;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  opacity: 1;
+  z-index: 100;
+  box-shadow: none;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Sidebar  */
+.app-sidebar {
+  grid-area: sidebar;
+  background: var(--light-gray);
+  border-right: 1px solid var(--border-color);
+  padding: 24px 16px;
+}
+
+/* Main Content */
+.app-main {
+  grid-area: main;
+  padding: 32px;
+  background: var(--secondary-color);
+}
+
+.notes-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.notes-header {
+  margin-bottom: 24px;
+}
+
+.notes-header h2 {
+  font-size: 24px;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.notes-header .recently-viewed {
+  font-size: 14px;
+  color: var(--text-gray);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 16px 0;
+}
+
+.loading,
+.empty-message {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-gray);
+}
+
+/* Footer */
+.app-footer {
+  grid-area: footer;
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 10px 0;
+  text-align: center;
+  font-size: 12px;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Navigation Tabs */
+.notes-nav {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-btn {
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-gray);
+  position: relative;
+}
+
+.nav-btn.active {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+/* Notification */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toast.success {
+  background: #5f8b4c;
+}
+
+.toast.error {
+  background: #f44336;
+}
+
+.toast.fade-out {
+  animation: fadeOut 0.3s ease-in;
+}
+
+.note-item.highlight {
+  animation: highlight 1s ease;
+}
+
+/* Loading Spinner */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive*/
+@media (max-width: 768px) {
+  .app-content {
+    grid-template-areas:
+      'header'
+      'main'
+      'sidebar'
+      'footer';
+    grid-template-columns: 1fr;
+  }
+
+  .app-main {
+    padding: 24px;
+  }
+
+  .app-sidebar {
+    border-right: none;
+    border-top: 1px solid var(--border-color);
+    padding: 16px;
+  }
+}
+@media (max-width: 576px) {
+  .notes-nav {
+    flex-direction: column;
+  }
+
+  .nav-btn {
+    text-align: left;
+    padding: 8px 12px;
+  }
+
+  .toast {
+    width: calc(100% - 40px);
+    left: 20px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main {
+    padding: 16px;
+  }
+
+  .notes-header h2 {
+    font-size: 20px;
+  }
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes highlight {
+  0% {
+    background-color: rgba(255, 213, 79, 0.3);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
